@@ -1,5 +1,12 @@
 <?php
-
+require_once "lib/libreria.php";
+$catalogo = obtenerProductos();
+/*
+        include
+        include_once
+        require
+        require_once
+    */
 
 ?>
 <!DOCTYPE html>
@@ -37,20 +44,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <form action="client.php" method="post">
-                                    <input type="hidden"
-                                        value="codigo_producto"
-                                        name="codprod" />
-                                    <button type="submit"
-                                        name="btnAddProduct">+</button>
-                                </form>
-                            </td>
-                        </tr>
+                        <?php foreach ($catalogo as $producto) { ?>
+                            <tr>
+                                <td><?php echo $producto["codprod"]; ?></td>
+                                <td><?php echo $producto["dscprod"]; ?></td>
+                                <td><?php echo $producto["precio"]; ?></td>
+                                <td>
+                                    <form action="client.php" method="post">
+                                        <input type="hidden" value="<?php echo $producto["codprod"]; ?>" name="codprod" />
+                                        <button type="submit" name="btnAddProduct">+</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
