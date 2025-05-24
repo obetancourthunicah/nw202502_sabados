@@ -1,5 +1,10 @@
 <?php
+
 function obtenerProductos()
+{
+    return getValueByKey("productos");
+}
+function obtenerProductosInitial()
 {
     return [
         [

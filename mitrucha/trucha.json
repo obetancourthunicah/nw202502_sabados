@@ -1,0 +1,17 @@
+{
+    "productos": [
+        {
+            "codprod": "P001",
+            "dscprod": "Burrita de Chorizo",
+            "precio": 70,
+            "stock": 25
+        },
+        {
+            "codprod": "P002",
+            "dscprod": "Coca Cola 16 oz",
+            "precio": 21,
+            "stock": 50
+        }
+    ],
+    "ordenes": []
+}
