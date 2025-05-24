@@ -85,6 +85,27 @@
                             <td></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Total: </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="client.php"
+                                    method="post">
+                                    <input type="hidden"
+                                        name="orderID"
+                                        value="order_id" />
+                                    <button type="submit" name="btnEnviar">
+                                        Enviar
+                                    </button>
+                                    <button type="submit" name="btnCancelar">
+                                        Cancelar
+                                    </button>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </section>
