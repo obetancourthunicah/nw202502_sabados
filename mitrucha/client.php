@@ -55,6 +55,37 @@
                 </table>
             </div>
             <div class="orden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cod </th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>&nbsp;</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <form action="client.php" method="post">
+                                    <input type="hidden"
+                                        value="codigo_producto"
+                                        name="codprod" />
+                                    <button type="submit"
+                                        name="btnAddProduct">+</button>
+                                    &nbsp;
+                                    <button type="submit"
+                                        name="btnRemoveProduct">-</button>
+                                </form>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
