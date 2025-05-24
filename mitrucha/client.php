@@ -1,6 +1,16 @@
 <?php
 require_once "lib/libreria.php";
 $catalogo = obtenerProductos();
+$orden = null;
+
+if (isset($_POST["btnAddProduct"])) {
+    $codprod = $_POST["codprod"];
+    $producto = obtenerProductoPorCodigo($codprod);
+    $orden = crearOrden();
+    $producto["cantidad"] = 1;
+    $orden["productos"][] = $producto;
+}
+
 /*
         include
         include_once
@@ -73,24 +83,30 @@ $catalogo = obtenerProductos();
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="right"></td>
-                            <td class="center">
-                                <form action="client.php" method="post">
-                                    <input type="hidden"
-                                        value="codigo_producto"
-                                        name="codprod" />
-                                    <button type="submit"
-                                        name="btnAddProduct">+</button>
-                                    &nbsp;
-                                    <button type="submit"
-                                        name="btnRemoveProduct">-</button>
-                                </form>
-                            </td>
-                            <td class="right"></td>
-                        </tr>
+                        <?php if ($orden) {
+                            foreach ($orden["productos"] as $producto) { ?>
+                                <tr>
+                                    <td><?php echo $producto["codprod"]; ?></td>
+                                    <td><?php echo $producto["dscprod"]; ?></td>
+                                    <td class="right"><?php echo $producto["cantidad"]; ?></td>
+                                    <td class="center">
+                                        <form action="client.php" method="post">
+                                            <input type="hidden"
+                                                value="<?php echo $producto["codprod"]; ?>"
+                                                name="codprod" />
+                                            <button type="submit"
+                                                name="btnAddProduct">+</button>
+                                            &nbsp;
+                                            <button type="submit"
+                                                name="btnRemoveProduct">-</button>
+                                        </form>
+                                    </td>
+                                    <td class="right">
+                                        <?php echo ($producto["cantidad"] * $producto["precio"]); ?>
+                                    </td>
+                                </tr>
+                        <?php }
+                        } ?>
                     </tbody>
                     <tfoot>
                         <tr>
