@@ -49,8 +49,8 @@ $catalogo = obtenerProductos();
                             <tr>
                                 <td><?php echo $producto["codprod"]; ?></td>
                                 <td><?php echo $producto["dscprod"]; ?></td>
-                                <td><?php echo $producto["precio"]; ?></td>
-                                <td>
+                                <td class="right"><?php echo $producto["precio"]; ?></td>
+                                <td class="center">
                                     <form action="client.php" method="post">
                                         <input type="hidden" value="<?php echo $producto["codprod"]; ?>" name="codprod" />
                                         <button type="submit" name="btnAddProduct">+</button>
@@ -76,8 +76,8 @@ $catalogo = obtenerProductos();
                         <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>
+                            <td class="right"></td>
+                            <td class="center">
                                 <form action="client.php" method="post">
                                     <input type="hidden"
                                         value="codigo_producto"
@@ -89,16 +89,16 @@ $catalogo = obtenerProductos();
                                         name="btnRemoveProduct">-</button>
                                 </form>
                             </td>
-                            <td></td>
+                            <td class="right"></td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="4">Total: </td>
-                            <td></td>
+                            <td colspan="4" class="right">Total: </td>
+                            <td class="right"></td>
                         </tr>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="5" class="right">
                                 <form action="client.php"
                                     method="post">
                                     <input type="hidden"
@@ -107,6 +107,7 @@ $catalogo = obtenerProductos();
                                     <button type="submit" name="btnEnviar">
                                         Enviar
                                     </button>
+                                    &nbsp;
                                     <button type="submit" name="btnCancelar">
                                         Cancelar
                                     </button>
