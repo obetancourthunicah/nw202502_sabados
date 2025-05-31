@@ -11,7 +11,37 @@
             "dscprod": "Coca Cola 16 oz",
             "precio": 21,
             "stock": 50
+        },
+        {
+            "codprod": "P003",
+            "dscprod": "Bote de Agua 16 oz",
+            "precio": 20,
+            "stock": 50
         }
     ],
-    "ordenes": []
+    "ordenes": [
+        {
+            "orderId": "1748702257",
+            "cliente": "Menganito de Tal",
+            "productos": [
+                {
+                    "codprod": "P001",
+                    "dscprod": "Burrita de Chorizo",
+                    "precio": 70,
+                    "stock": 25,
+                    "cantidad": 3,
+                    "subtotal": 210
+                },
+                {
+                    "codprod": "P002",
+                    "dscprod": "Coca Cola 16 oz",
+                    "precio": 21,
+                    "stock": 50,
+                    "cantidad": 3,
+                    "subtotal": 63
+                }
+            ],
+            "total": 273
+        }
+    ]
 }
