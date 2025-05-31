@@ -4,19 +4,19 @@
             "codprod": "P001",
             "dscprod": "Burrita de Chorizo",
             "precio": 70,
-            "stock": 25
+            "stock": 22
         },
         {
             "codprod": "P002",
             "dscprod": "Coca Cola 16 oz",
             "precio": 21,
-            "stock": 50
+            "stock": 47
         },
         {
             "codprod": "P003",
             "dscprod": "Bote de Agua 16 oz",
             "precio": 20,
-            "stock": 50
+            "stock": 49
         }
     ],
     "ordenes": [
@@ -50,7 +50,47 @@
                 }
             ],
             "total": 293,
-            "estado": "Posteado"
+            "estado": "Entregado"
+        },
+        {
+            "orderId": "1748709922",
+            "cliente": "Fulano de Tal",
+            "productos": [
+                {
+                    "codprod": "P001",
+                    "dscprod": "Burrita de Chorizo",
+                    "precio": 70,
+                    "stock": 22,
+                    "cantidad": 1,
+                    "subtotal": 70
+                },
+                {
+                    "codprod": "P003",
+                    "dscprod": "Bote de Agua 16 oz",
+                    "precio": 20,
+                    "stock": 49,
+                    "cantidad": 1,
+                    "subtotal": 20
+                }
+            ],
+            "total": 90,
+            "estado": "Cancelado"
+        },
+        {
+            "orderId": "1748709950",
+            "cliente": "Hugo Paco y Luis",
+            "productos": [
+                {
+                    "codprod": "P002",
+                    "dscprod": "Coca Cola 16 oz",
+                    "precio": 21,
+                    "stock": 47,
+                    "cantidad": 3,
+                    "subtotal": 63
+                }
+            ],
+            "total": 63,
+            "estado": "Preparado"
         }
     ]
 }

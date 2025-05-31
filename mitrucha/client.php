@@ -2,8 +2,13 @@
 require_once "lib/libreria.php";
 $catalogo = obtenerProductos();
 $ordenIdActivo = obtenerOrdenActiva();
-
 $orden = null;
+
+if (isset($_POST["btnNewOrder"])) {
+    $ordenIdActivo = null;
+    $orden = null;
+    guardarOrdenActiva(null);
+}
 
 if ($ordenIdActivo) {
     $orden = obtenerOrdenPorId($ordenIdActivo);
@@ -192,6 +197,16 @@ if (isset($_POST["btnCancelar"])) {
                                     <th colspan="3"><?php echo $orden["cliente"]; ?></th>
                                     <th><?php echo $orden["estado"]; ?></th>
                                 </tr>
+                                <?php if ($orden["estado"] == "Entregado") { ?>
+                                    <tr>
+                                        <td colspan="4">
+                                            <h2>Gracias por Comprar en Mi Trucha</h2>
+                                            <form action="client.php" method="post">
+                                                <button type="submit" name="btnNewOrder">Nueva Orden?</buton>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                                 <tr>
                                     <th>Cod </th>
                                     <th>Producto</th>
