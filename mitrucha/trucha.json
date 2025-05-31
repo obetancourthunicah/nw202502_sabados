@@ -39,9 +39,18 @@
                     "stock": 50,
                     "cantidad": 3,
                     "subtotal": 63
+                },
+                {
+                    "codprod": "P003",
+                    "dscprod": "Bote de Agua 16 oz",
+                    "precio": 20,
+                    "stock": 50,
+                    "cantidad": 1,
+                    "subtotal": 20
                 }
             ],
-            "total": 273
+            "total": 293,
+            "estado": "Posteado"
         }
     ]
 }

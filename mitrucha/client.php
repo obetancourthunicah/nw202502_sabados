@@ -30,6 +30,20 @@ if (isset($_POST["btnRemoveProduct"])) {
     $orden = obtenerOrdenPorId($ordenIdActivo);
 }
 
+if (isset($_POST["btnEnviar"])) {
+    postearOrden($ordenIdActivo);
+    $orden = obtenerOrdenPorId($ordenIdActivo);
+}
+
+if (isset($_POST["btnCancelar"])) {
+    cancelarOrden($ordenIdActivo);
+    guardarOrdenActiva(null);
+    $ordenIdActivo = null;
+    $orden = null;
+}
+
+//"btnEnviar"
+//"btnCancelar"
 
 /*
         include
@@ -81,96 +95,134 @@ if (isset($_POST["btnRemoveProduct"])) {
                 </div>
             </section>
         <?php } else { ?>
-            <section>
-                <div class="productos">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Cod</th>
-                                <th>Producto</th>
-                                <th>Precio</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($catalogo as $producto) { ?>
+            <?php if ($orden["estado"] == "Abierto") { ?>
+                <section>
+                    <div class="productos">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td><?php echo $producto["codprod"]; ?></td>
-                                    <td><?php echo $producto["dscprod"]; ?></td>
-                                    <td class="right"><?php echo $producto["precio"]; ?></td>
-                                    <td class="center">
-                                        <form action="client.php" method="post">
-                                            <input type="hidden" value="<?php echo $producto["codprod"]; ?>" name="codprod" />
-                                            <button type="submit" name="btnAddProduct">+</button>
-                                        </form>
-                                    </td>
+                                    <th>Cod</th>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>&nbsp;</th>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="orden">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Cod </th>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>&nbsp;</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if ($orden) {
-                                foreach ($orden["productos"] as $producto) { ?>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($catalogo as $producto) { ?>
                                     <tr>
                                         <td><?php echo $producto["codprod"]; ?></td>
                                         <td><?php echo $producto["dscprod"]; ?></td>
-                                        <td class="right"><?php echo $producto["cantidad"]; ?></td>
+                                        <td class="right"><?php echo $producto["precio"]; ?></td>
                                         <td class="center">
                                             <form action="client.php" method="post">
-                                                <input type="hidden"
-                                                    value="<?php echo $producto["codprod"]; ?>"
-                                                    name="codprod" />
-                                                <button type="submit"
-                                                    name="btnAddProduct">+</button>
-                                                &nbsp;
-                                                <button type="submit"
-                                                    name="btnRemoveProduct">-</button>
+                                                <input type="hidden" value="<?php echo $producto["codprod"]; ?>" name="codprod" />
+                                                <button type="submit" name="btnAddProduct">+</button>
                                             </form>
                                         </td>
-                                        <td class="right">
-                                            <?php echo ($producto["subtotal"]); ?>
-                                        </td>
                                     </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4" class="right">Total: </td>
-                                <td class="right"><?php echo $orden["total"]; ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="right">
-                                    <form action="client.php"
-                                        method="post">
-                                        <input type="hidden"
-                                            name="orderID"
-                                            value="order_id" />
-                                        <button type="submit" name="btnEnviar">
-                                            Enviar
-                                        </button>
-                                        &nbsp;
-                                        <button type="submit" name="btnCancelar">
-                                            Cancelar
-                                        </button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </section>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="orden">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cod </th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>&nbsp;</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($orden) {
+                                    foreach ($orden["productos"] as $producto) { ?>
+                                        <tr>
+                                            <td><?php echo $producto["codprod"]; ?></td>
+                                            <td><?php echo $producto["dscprod"]; ?></td>
+                                            <td class="right"><?php echo $producto["cantidad"]; ?></td>
+                                            <td class="center">
+                                                <form action="client.php" method="post">
+                                                    <input type="hidden"
+                                                        value="<?php echo $producto["codprod"]; ?>"
+                                                        name="codprod" />
+                                                    <button type="submit"
+                                                        name="btnAddProduct">+</button>
+                                                    &nbsp;
+                                                    <button type="submit"
+                                                        name="btnRemoveProduct">-</button>
+                                                </form>
+                                            </td>
+                                            <td class="right">
+                                                <?php echo ($producto["subtotal"]); ?>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="right">Total: </td>
+                                    <td class="right"><?php echo $orden["total"]; ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="right">
+                                        <form action="client.php"
+                                            method="post">
+                                            <button type="submit" name="btnEnviar">
+                                                Enviar
+                                            </button>
+                                            &nbsp;
+                                            <button type="submit" name="btnCancelar">
+                                                Cancelar
+                                            </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+            <?php } else { ?>
+                <section>
+                    <div class="orden">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="3"><?php echo $orden["cliente"]; ?></th>
+                                    <th><?php echo $orden["estado"]; ?></th>
+                                </tr>
+                                <tr>
+                                    <th>Cod </th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($orden) {
+                                    foreach ($orden["productos"] as $producto) { ?>
+                                        <tr>
+                                            <td><?php echo $producto["codprod"]; ?></td>
+                                            <td><?php echo $producto["dscprod"]; ?></td>
+                                            <td class="right"><?php echo $producto["cantidad"]; ?></td>
+                                            <td class="right">
+                                                <?php echo ($producto["subtotal"]); ?>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="right">Total: </td>
+                                    <td class="right"><?php echo $orden["total"]; ?></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+            <?php } ?>
         <?php } ?>
     </main>
     <footer>
